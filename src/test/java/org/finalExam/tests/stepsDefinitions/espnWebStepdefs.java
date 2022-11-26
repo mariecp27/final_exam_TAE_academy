@@ -1,12 +1,14 @@
 package org.finalExam.tests.stepsDefinitions;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+import io.cucumber.java.AfterAll;
+import io.cucumber.java.BeforeAll;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.finalExam.configuration.DriverWeb;
 import org.finalExam.pageObjects.pages.HomePage;
+import org.finalExam.pageObjects.pages.WatchPage;
 import org.finalExam.reporting.Reporter;
 import org.testng.Assert;
 
@@ -16,22 +18,24 @@ public class espnWebStepdefs {
 
     private static DriverWeb driver;
     private HomePage homePage;
+    private WatchPage watchPage;
     private final String URL = "https://www.espnqa.com/?src=com&_adblock=true&espn=cloud";
     private final String USER = "Test";
     private static String email;
+    private final String EMAIL_LOGIN = "test.login.email.espn@gmail.com";
     private final String PASSWORD = "testpassword2022";
     private final String USER_WELCOME = "Welcome" + USER + "!";
 
 
-    @Before
-    public void scenarioSetUp() {
+    @BeforeAll
+    public static void scenarioSetUp() {
         driver = new DriverWeb();
         Reporter.info("Deleting all cookies");
         driver.getDriver().manage().deleteAllCookies();
     }
 
-    @After
-    public void tearDown() {
+    @AfterAll
+    public static void tearDown() {
         driver.getDriver().quit();
     }
 
@@ -44,8 +48,8 @@ public class espnWebStepdefs {
         homePage.closeBanner();
     }
 
-    @When("I select the Log In option")
-    public void iSelectTheLogInOption() {
+    @Given("I am in the Log In modal")
+    public void iAmInTheLogInModal() {
         homePage.mouseOverUserIcon();
         homePage.clickOnLoginLinkInHomePage();
         homePage.switchToIframe();
@@ -93,5 +97,83 @@ public class espnWebStepdefs {
 
         Reporter.info("Verifying the Close button is visible");
         Assert.assertTrue(homePage.closeIframeButtonIsDisplayed(), "Close button is not visible");
+    }
+
+    @And("Enter all information for signing up")
+    public void enterAllInformationForSigningUp() {
+        email = homePage.setEmail();
+        homePage.typeOnFirstNameInput(USER);
+        homePage.typeOnLastNameInput(USER);
+        homePage.typeOnEmailInputForSignUp(email);
+        homePage.typeOnPasswordInputForSignUp(PASSWORD);
+        homePage.mouseOverSignUpForSignUpButtonIframe();
+        homePage.clickOnSignUpForSignUpButtonIframe();
+        homePage.goOutFromIframe();
+    }
+
+    @Then("I should be logged in")
+    public void iShouldBeLoggedIn() {
+        homePage.waitForLogin();
+        homePage.mouseOverUserIcon();
+        Reporter.info("Verifying the account was properly created");
+        Assert.assertEquals(homePage.getWelcomeText(), USER_WELCOME, "Account was not created");
+        homePage.clickOnLogoutLinkInHomePage();
+        homePage.waitForLogout();
+    }
+
+    @Given("I am logged")
+    public void iAmLogged() {
+        homePage.generalLoginProcedure(EMAIL_LOGIN, PASSWORD);
+    }
+
+    @When("I go to the Watch page")
+    public void iGoToTheWatchPage() {
+        watchPage = homePage.goToWatchPage();
+    }
+
+    @Then("The page elements should be properly displayed")
+    public void thePageElementsShouldBeProperlyDisplayed() {
+        Reporter.info("Verifying all cards in the second carousel have a title");
+        Assert.assertTrue(watchPage.checkAllCardsTitle(), "Not all cards in the second carousel have a title");
+
+        Reporter.info("Verifying all cards in the second carousel have a description");
+        Assert.assertTrue(watchPage.checkAllCardsDescription(), "Not all cards in the second carousel have a description");
+
+        watchPage.clickCard();
+        Reporter.info("Verifying Close button is visible");
+        Assert.assertTrue(watchPage.closeButtonModalIsDisplayed(), "Close button is not visible");
+        watchPage.clickOnCloseButtonModal();
+    }
+
+    @And("I should be able to return to the Home page")
+    public void iShouldBeAbleToReturnToTheHomePage() {
+        watchPage.returnToHomePage();
+        Reporter.info("Verifying it has been returned to the Home page");
+        Assert.assertTrue(homePage.userIconIsDisplayed(), "It has not been returned to the Home page");
+    }
+
+    @When("I move the mouse over the User Icon")
+    public void iMoveTheMouseOverTheUserIcon() {
+        homePage.mouseOverUserIcon();
+    }
+
+    @Then("The welcome text is displayed along with my name")
+    public void theWelcomeTextIsDisplayedAlongWithMyName() {
+        Reporter.info("Verifying the welcome text was properly displayed");
+        Assert.assertEquals(homePage.getWelcomeText(), USER_WELCOME, "The welcome text was not properly displayed");
+    }
+
+    @When("I log out")
+    public void iLogOut() {
+        homePage.mouseOverUserIcon();
+        homePage.clickOnLogoutLinkInHomePage();
+        homePage.waitForLogout();
+    }
+
+    @Then("The welcome text is displayed along without my name")
+    public void theWelcomeTextIsDisplayedAlongWithoutMyName() {
+        homePage.mouseOverUserIcon();
+        Reporter.info("Verifying the welcome text was properly displayed");
+        Assert.assertEquals(homePage.getWelcomeText(), "Welcome!", "The welcome text was not properly displayed");
     }
 }

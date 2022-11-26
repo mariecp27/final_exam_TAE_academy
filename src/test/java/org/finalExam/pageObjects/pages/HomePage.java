@@ -79,21 +79,6 @@ public class HomePage extends BasePage {
     @FindBy (css = "div.global-user:last-child ul.account-management li.display-user")
     private WebElement welcomeText;
 
-    @FindBy (css = "div.global-user:last-child ul.account-management > li:nth-child(5) > a")
-    private WebElement espnProfileLink;
-
-    @FindBy (id = "AccountDeleteLink")
-    private WebElement deleteAccountLinkIframe;
-
-    @FindBy (css = "#TextBlock + #BtnSubmit")
-    private  WebElement deleteAccountButtonIframe;
-
-    @FindBy (css = "#TextError + #BtnSubmit")
-    private  WebElement deleteAccountConfirmationIframe;
-
-    @FindBy (css = ".account-deleted-gating + #Title")
-    private  WebElement deleteAccountTitleIframe;
-
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -127,6 +112,11 @@ public class HomePage extends BasePage {
         super.waitForInvisibility(loginModalIframe);
         super.waitForPresenceOfElement("#sideLogin-left-rail");
         super.waitForAttributeChange(loginBox, "style", "display: block;");
+    }
+
+    public boolean userIconIsDisplayed() {
+        super.waitForVisibility(this.userIcon);
+        return this.userIcon.isDisplayed();
     }
 
     public void mouseOverUserIcon() {
@@ -261,33 +251,12 @@ public class HomePage extends BasePage {
         return this.welcomeText.getText();
     }
 
-    public void clickOnEspnProfileLink() {
-        super.clickElement(this.espnProfileLink);
-    }
-
-    public void clickOnDeleteAccountLinkIframe() {
-        super.clickElement(this.deleteAccountLinkIframe);
-    }
-
-    public void clickOnDeleteAccountButtonIframe() {
-        super.clickElement(this.deleteAccountButtonIframe);
-    }
-
-    public void clickOnDeleteAccountConfirmationIframe() {
-        super.clickElement(this.deleteAccountConfirmationIframe);
-    }
-
-    public String getDeleteAccountTitleIframeText() {
-        super.waitForVisibility(deleteAccountTitleIframe);
-        return this.deleteAccountTitleIframe.getText();
-    }
-
     public String setEmail() {
         int randomValue = (int)(Math.random() * 1000);
         return  "test.new.email.espn" + randomValue + "@gmail.com";
     }
 
-    protected void generalLoginProcedure(String email, String password) {
+    public void generalLoginProcedure(String email, String password) {
         this.mouseOverUserIcon();
         this.clickOnLoginLinkInHomePage();
         this.switchToIframe();
@@ -295,5 +264,6 @@ public class HomePage extends BasePage {
         this.typeOnPasswordInput(password);
         this.clickOnLoginButtonIframe();
         this.goOutFromIframe();
+        this.waitForLogin();
     }
 }

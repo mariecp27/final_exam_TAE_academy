@@ -34,7 +34,7 @@ public class WatchPage extends BasePage {
         List<Boolean> isTitle = new ArrayList<>();
         waitForPresenceOfElements("ul.Carousel__Inner li");
         getCadsInSecondCarousel().stream().forEach(element -> {
-            isTitle.add(element.findElement(By.cssSelector("h2.WatchTile__Title")).isDisplayed() && !element.findElement(By.cssSelector("h2.WatchTile__Title")).getText().equals(""));
+            isTitle.add(!element.findElement(By.cssSelector("h2.WatchTile__Title")).getText().equals(""));
         });
         return !isTitle.contains(false);
     }
@@ -43,7 +43,7 @@ public class WatchPage extends BasePage {
         List<Boolean> isDescription = new ArrayList<>();
         waitForPresenceOfElements("ul.Carousel__Inner li");
         getCadsInSecondCarousel().stream().forEach(element -> {
-            isDescription.add(element.findElement(By.cssSelector(".WatchTile__Meta")).isDisplayed() && !element.findElement(By.cssSelector(".WatchTile__Meta")).getText().equals(""));
+            isDescription.add(!element.findElement(By.cssSelector(".WatchTile__Meta")).getText().equals(""));
         });
         return !isDescription.contains(false);
     }
