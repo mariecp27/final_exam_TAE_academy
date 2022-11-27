@@ -5,6 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+/**
+ * Class which contains all 'Home' page elements and methods.
+ */
 public class HomePage extends BasePage {
 
     @FindBy (css = ".promo-banner-container iframe")
@@ -79,10 +82,18 @@ public class HomePage extends BasePage {
     @FindBy (css = "div.global-user:last-child ul.account-management li.display-user")
     private WebElement welcomeText;
 
+    /**
+     * Constructor method, extended from {@link org.finalExam.pageObjects.pages.BasePage}
+     * @param driver WebDriver
+     */
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
+    /**
+     * Allows to verify if the promo banner in the 'Home' page is displayed.
+     * @return true if the promo banner is displayed, otherwise false
+     */
     public boolean verifyBannerIframe() {
         boolean isBanner = true;
         try {
@@ -93,6 +104,9 @@ public class HomePage extends BasePage {
         return isBanner;
     }
 
+    /**
+     * Allows to close the promo banner in the 'Home' page if it is displayed.
+     */
     public void closeBanner() {
         if (this.verifyBannerIframe()) {
             super.getDriver().switchTo().frame(this.iframeBanner);
@@ -102,40 +116,65 @@ public class HomePage extends BasePage {
         }
     }
 
+    /**
+     * Allows to wait for the page to reload once a user has logged in.
+     */
     public void waitForLogin() {
         super.waitForInvisibility(loginModalIframe);
         super.waitForPresenceOfElement("#sideLogin-left-rail");
         super.waitForAttributeChange(loginBox, "style", "display: none;");
     }
 
+    /**
+     * Allows to wait for the page to reload once a user has logged out.
+     */
     public void waitForLogout() {
         super.waitForInvisibility(loginModalIframe);
         super.waitForPresenceOfElement("#sideLogin-left-rail");
         super.waitForAttributeChange(loginBox, "style", "display: block;");
     }
 
+    /**
+     * Allows to verify if the User icon is displayed.
+     * @return true if the User icon is displayed, otherwise false
+     */
     public boolean userIconIsDisplayed() {
         super.waitForVisibility(this.userIcon);
         return this.userIcon.isDisplayed();
     }
 
+    /**
+     * Performs a mouse over action on the User icon.
+     */
     public void mouseOverUserIcon() {
         super.mouseOver(this.userIcon);
         super.waitForVisibility(this.userOptionsContainer);
     }
 
+    /**
+     * Allows to click on the Login option.
+     */
     public void clickOnLoginLinkInHomePage() {
         super.clickElement(this.loginLinkInHomePage);
     }
 
+    /**
+     * Allows to click on the Logout option.
+     */
     public void clickOnLogoutLinkInHomePage() {
         super.clickElement(this.logOutLinkInHomePage);
     }
 
+    /**
+     * Allows to change the test context to the login/sign up iframe.
+     */
     public void switchToIframe() {
         super.getDriver().switchTo().frame(this.iframe);
     }
 
+    /**
+     * Allows to change the test context to the 'Home' page.
+     */
     public void goOutFromIframe() {
         super.getDriver().switchTo().defaultContent();
     }
