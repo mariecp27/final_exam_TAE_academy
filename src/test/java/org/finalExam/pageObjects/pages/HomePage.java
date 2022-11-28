@@ -166,7 +166,7 @@ public class HomePage extends BasePage {
     }
 
     /**
-     * Allows to change the test context to the login/sign up iframe.
+     * Allows to change the test context to the Login/Sign Up iframe.
      */
     public void switchToIframe() {
         super.getDriver().switchTo().frame(this.iframe);
@@ -179,122 +179,219 @@ public class HomePage extends BasePage {
         super.getDriver().switchTo().defaultContent();
     }
 
+    /**
+     * Verifies if the Login modal is displayed.
+     * @return true if the Login modal is displayed, otherwise false
+     */
     public boolean modalIsDisplayed() {
         super.waitForVisibility(this.loginModalIframe);
         return this.loginModalIframe.isDisplayed();
     }
 
+    /**
+     * Verifies if the ESPN logo in the Login modal is displayed.
+     * @return true if the ESPN Logo in the Login modal is displayed, otherwise false
+     */
     public boolean espnLogoIsDisplayed() {
         super.waitForVisibility(this.espnLogoIframe);
         return this.espnLogoIframe.isDisplayed();
     }
 
+    /**
+     * Verifies if the Login button in the Login modal is displayed.
+     * @return true if the Login button in the Login modal is displayed, otherwise false
+     */
     public boolean loginButtonIsDisplayed() {
         super.waitForVisibility(this.loginButtonIframe);
         return this.loginButtonIframe.isDisplayed();
     }
 
+    /**
+     * Verifies if the Sign-Up button in the Login modal is displayed.
+     * @return true if the Sign-Up button in the Login modal is displayed, otherwise false
+     */
     public boolean signUpButtonIsDisplayed() {
         super.waitForVisibility(this.signUpButtonIframe);
         return this.signUpButtonIframe.isDisplayed();
     }
 
+    /**
+     * Allows to write a given String in the Email input located in the Login modal.
+     * @param text String
+     */
     public void typeOnEmailInput(String text) {
         super.waitForVisibility(this.emailInputIframe);
         super.typeOnInput(this.emailInputIframe, text);
     }
 
+    /**
+     * Allows to write a given String in the Password input located in the Login modal.
+     * @param text String
+     */
     public void typeOnPasswordInput(String text) {
         super.waitForVisibility(this.passwordInputIframe);
         super.typeOnInput(this.passwordInputIframe, text);
     }
 
+    /**
+     * Verifies if the Title in the Sign-Up modal is displayed.
+     * @return true if the Title in the Sign-Up modal is displayed, otherwise false
+     */
     public boolean signUPTitleIsDisplayed() {
         super.waitForVisibility(this.signUpTitleIframe);
         return this.signUpTitleIframe.isDisplayed();
     }
 
+    /**
+     * Verifies if the First Name input in the Sign-Up modal is displayed.
+     * @return true if the First Name input in the Sign-Up modal is displayed, otherwise false
+     */
     public boolean firstNameInputIsDisplayed() {
         super.waitForVisibility(this.firstNameInputIframe);
         return this.firstNameInputIframe.isDisplayed();
     }
 
+    /**
+     * Verifies if the Last Name input in the Sign-Up modal is displayed.
+     * @return true if the Last Name input in the Sign-Up modal is displayed, otherwise false
+     */
     public boolean lastNameInputIsDisplayed() {
         super.waitForVisibility(this.lastNameInputIframe);
         return this.lastNameInputIframe.isDisplayed();
     }
 
+    /**
+     * Verifies if the Email input in the Sign-Up modal is displayed.
+     * @return true if the Email input in the Sign-Up modal is displayed, otherwise false
+     */
     public boolean emailInputForSignUpIsDisplayed() {
         super.waitForVisibility(this.emailForSignUpInputIframe);
         return this.emailForSignUpInputIframe.isDisplayed();
     }
 
+    /**
+     * Verifies if the Password input in the Sign-Up modal is displayed.
+     * @return true if the Password input in the Sign-Up modal is displayed, otherwise false
+     */
     public boolean passwordInputForSignUpIsDisplayed() {
         super.waitForVisibility(this.passwordForSignUpInputIframe);
         return this.passwordForSignUpInputIframe.isDisplayed();
     }
 
+    /**
+     * Verifies if the Sign-Up button in the Sign-Up modal is displayed.
+     * @return true if the Sign-Up button in the Sign-Up modal is displayed, otherwise false
+     */
     public boolean signUpButtonForSignUpIsDisplayed() {
         super.waitForVisibility(this.signUpButtonForSignUpIframe);
         return this.signUpButtonForSignUpIframe.isDisplayed();
     }
 
+    /**
+     * Verifies if the Close button in the Sign-Up modal is displayed.
+     * @return true if the Close button in the Sign-Up modal is displayed, otherwise false
+     */
     public boolean closeIframeButtonIsDisplayed() {
         super.waitForVisibility(this.closeIframeButton);
         return this.closeIframeButton.isDisplayed();
     }
 
+    /**
+     * Allows to write a given String in the First Name input located in the Sign-Up modal.
+     * @param text String
+     */
     public void typeOnFirstNameInput(String text) {
         super.waitForVisibility(this.firstNameInputIframe);
         super.typeOnInput(this.firstNameInputIframe, text);
     }
 
+    /**
+     * Allows to write a given String in the Last Name input located in the Sign-Up modal.
+     * @param text String
+     */
     public void typeOnLastNameInput(String text) {
         super.waitForVisibility(this.lastNameInputIframe);
         super.typeOnInput(this.lastNameInputIframe, text);
     }
 
+    /**
+     * Allows to write a given String in the Email input located in the Sign-Up modal.
+     * @param text String
+     */
     public void typeOnEmailInputForSignUp(String text) {
         super.waitForVisibility(this.emailForSignUpInputIframe);
         super.typeOnInput(this.emailForSignUpInputIframe, text);
     }
 
+    /**
+     * Allows to write a given String in the Password input located in the Sign-Up modal.
+     * @param text String
+     */
     public void typeOnPasswordInputForSignUp(String text) {
         super.waitForVisibility(this.passwordForSignUpInputIframe);
         super.typeOnInput(this.passwordForSignUpInputIframe, text);
     }
 
+    /**
+     * Allows to click on the Login button located in the Login modal.
+     */
     public void clickOnLoginButtonIframe() {
         super.clickElement(this.loginButtonIframe);
     }
 
+    /**
+     * Allows to click on the Sign-Up button located in the Login modal.
+     */
     public void clickOnSignUpButtonIframe() {
         super.clickElement(this.signUpButtonIframe);
     }
 
+    /**
+     * Allows to click on the Sign-Up button located in the Sign-Up modal.
+     */
     public void clickOnSignUpForSignUpButtonIframe() {
         super.clickElement(this.signUpButtonForSignUpIframe);
     }
 
+    /**
+     * Allows to move the mouse over the Sign-Up button located in the Sign-Up modal.
+     */
     public void mouseOverSignUpForSignUpButtonIframe() {
         super.mouseOver(this.signUpButtonForSignUpIframe);
     }
 
+    /**
+     * Allows to click on the Watch link in the 'Home' page for navigating to the 'Watch' page.
+     * @return {@link org.finalExam.pageObjects.pages.WatchPage}
+     */
     public WatchPage goToWatchPage() {
         super.clickElement(this.watchLink);
         return new WatchPage(getDriver());
     }
 
+    /**
+     * Gets the Welcome text, which os displayed while performing a mouse over action on the User icon.
+     * @return String
+     */
     public String getWelcomeText() {
         super.waitForVisibility(this.welcomeText);
         return this.welcomeText.getText();
     }
 
+    /**
+     * Allow to generate a random email for the Sign-Up procedure.
+     * @return String
+     */
     public String setEmail() {
         int randomValue = (int)(Math.random() * 1000);
         return  "test.new.email.espn" + randomValue + "@gmail.com";
     }
 
+    /**
+     * Performs all needed steps for logging in.
+     * @param email String
+     * @param password String
+     */
     public void generalLoginProcedure(String email, String password) {
         this.mouseOverUserIcon();
         this.clickOnLoginLinkInHomePage();
