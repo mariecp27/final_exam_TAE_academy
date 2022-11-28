@@ -14,7 +14,7 @@ import org.testng.Assert;
 
 import static java.lang.String.format;
 
-public class espnWebStepdefs {
+public class EspnWebStepdefs {
 
     private static DriverWeb driver;
     private HomePage homePage;

@@ -4,7 +4,7 @@ import org.finalExam.configuration.WebOperations;
 import org.openqa.selenium.WebDriver;
 
 /**
- * Base class for all page objects.
+ * Base class for all web page objects.
  */
 public class BasePage extends WebOperations {
 

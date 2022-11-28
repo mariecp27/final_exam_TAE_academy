@@ -1,4 +1,5 @@
-Feature: ESPN procedure review
+@webAutomation
+Feature: ESPN performance review
   In order to verify several features in the ESPN website
   As a ESPN website user
   I want to log in successfully and navigate to other pages
