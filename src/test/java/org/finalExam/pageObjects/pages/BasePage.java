@@ -1,16 +1,15 @@
 package org.finalExam.pageObjects.pages;
 
-import org.finalExam.configuration.WebOperations;
+import org.finalExam.configuration.web.WebOperations;
 import org.openqa.selenium.WebDriver;
 
 /**
- * Base class for all page objects.
+ * Base class for all web page objects.
  */
 public class BasePage extends WebOperations {
 
     /**
      * Constructor method.
-     * @param driver WebDriver
      */
     public BasePage(WebDriver driver) {
         super(driver);

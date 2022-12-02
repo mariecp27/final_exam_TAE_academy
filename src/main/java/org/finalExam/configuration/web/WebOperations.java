@@ -1,13 +1,9 @@
-package org.finalExam.configuration;
+package org.finalExam.configuration.web;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 import static org.openqa.selenium.support.PageFactory.initElements;
 
@@ -18,7 +14,7 @@ public class WebOperations {
 
     private final WebDriver driver;
     private final WebDriverWait wait;
-    private final long waitDuration = 10L;
+    private final long waitDuration = 15L;
 
     /**
      * Constructor method.
@@ -28,10 +24,11 @@ public class WebOperations {
      *     <li>Define general wait duration</li>
      *     <li>Initialize web elements</li>
      * </ul>
+     * @param driver WebDriver
      */
     public WebOperations(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(waitDuration));
+        this.wait = new WebDriverWait(driver, waitDuration);
         initElements(driver, this);
     }
 
@@ -40,7 +37,7 @@ public class WebOperations {
      * @return WebDriver
      */
     public WebDriver getDriver() {
-        return this.driver;
+        return driver;
     }
 
     /**
@@ -79,13 +76,6 @@ public class WebOperations {
         this.wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    /**
-     * Allows to wait for an element to be invisible.
-     * @param element WebElement
-     */
-    public void waitForInvisibility(WebElement element) {
-        this.wait.until(ExpectedConditions.invisibilityOf(element));
-    }
 
     /**
      * Allows to move the mouse over a given element.
@@ -102,6 +92,16 @@ public class WebOperations {
      */
     public void waitForPresenceOfElement(String locator) {
         this.wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(locator)));
+    }
+
+    /**
+     * Allows to wait for an element to be present on the DOM of the page during a custom period of time (in seconds).
+     * @param locator String
+     * @param timeout long
+     */
+    public void waitForPresenceOfElement(String locator, long timeout) {
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(locator)));
     }
 
     /**

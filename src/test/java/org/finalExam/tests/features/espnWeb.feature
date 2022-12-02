@@ -1,4 +1,5 @@
-Feature: ESPN procedure review
+@webAutomation
+Feature: ESPN performance review
   In order to verify several features in the ESPN website
   As a ESPN website user
   I want to log in successfully and navigate to other pages
@@ -41,4 +42,4 @@ Feature: ESPN procedure review
   Scenario: Verify Welcome texts when logged out
     Given I am logged
     When I log out
-    Then The welcome text is displayed along without my name
+    Then The welcome text is displayed without my name

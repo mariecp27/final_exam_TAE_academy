@@ -84,7 +84,6 @@ public class HomePage extends BasePage {
 
     /**
      * Constructor method, extended from {@link org.finalExam.pageObjects.pages.BasePage}
-     * @param driver WebDriver
      */
     public HomePage(WebDriver driver) {
         super(driver);
@@ -97,7 +96,7 @@ public class HomePage extends BasePage {
     public boolean verifyBannerIframe() {
         boolean isBanner = true;
         try {
-            super.waitForPresenceOfElement(".promo-banner-container iframe");
+            super.waitForPresenceOfElement(".promo-banner-container iframe", 5);
         } catch (TimeoutException e) {
             isBanner = false;
         }
@@ -120,7 +119,6 @@ public class HomePage extends BasePage {
      * Allows to wait for the page to reload once a user has logged in.
      */
     public void waitForLogin() {
-        super.waitForInvisibility(loginModalIframe);
         super.waitForPresenceOfElement("#sideLogin-left-rail");
         super.waitForAttributeChange(loginBox, "style", "display: none;");
     }
@@ -129,7 +127,6 @@ public class HomePage extends BasePage {
      * Allows to wait for the page to reload once a user has logged out.
      */
     public void waitForLogout() {
-        super.waitForInvisibility(loginModalIframe);
         super.waitForPresenceOfElement("#sideLogin-left-rail");
         super.waitForAttributeChange(loginBox, "style", "display: block;");
     }
@@ -366,7 +363,7 @@ public class HomePage extends BasePage {
      */
     public WatchPage goToWatchPage() {
         super.clickElement(this.watchLink);
-        return new WatchPage(getDriver());
+        return new WatchPage(super.getDriver());
     }
 
     /**

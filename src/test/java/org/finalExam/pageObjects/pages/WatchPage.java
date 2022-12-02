@@ -27,7 +27,6 @@ public class WatchPage extends BasePage {
 
     /**
      * Constructor method, extended from {@link org.finalExam.pageObjects.pages.BasePage}
-     * @param driver WebDriver
      */
     public WatchPage(WebDriver driver) {
         super(driver);
@@ -99,6 +98,6 @@ public class WatchPage extends BasePage {
      */
     public HomePage returnToHomePage() {
         super.getDriver().navigate().back();
-        return new HomePage(getDriver());
+        return new HomePage(super.getDriver());
     }
 }
