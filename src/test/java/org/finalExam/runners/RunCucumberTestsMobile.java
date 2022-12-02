@@ -8,7 +8,7 @@ import io.cucumber.testng.CucumberOptions;
  */
 @CucumberOptions(
         features = "src/test/java/org/finalExam/tests/features",
-        glue = {"org.finalExam.tests.stepsDefinitions"},
+        glue = {"org.finalExam.tests.stepsDefinitions.mobile"},
         tags = "@mobileAutomation")
 public class RunCucumberTestsMobile extends AbstractTestNGCucumberTests {
 }

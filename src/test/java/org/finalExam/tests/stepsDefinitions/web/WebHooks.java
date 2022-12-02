@@ -14,7 +14,7 @@ public class WebHooks {
     private static CustomWebDriverManager driver;
 
     /**
-     * Before hook for initializing the driver and goring to the 'Home' page.
+     * Before hook for initializing the driver and going to the 'Home' page.
      */
     @Before
     public void setUp() {
