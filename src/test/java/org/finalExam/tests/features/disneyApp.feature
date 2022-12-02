@@ -10,3 +10,8 @@ Feature: Disney app performance review
   Scenario: Verify Map view
     Given I am in the Map view
     Then The Map view and its elements should be displayed
+
+  Scenario: Verify Category List
+    Given I am in the Map view
+    When I tap on the Category List button
+    Then Different categories, including Hotels option, should be displayed

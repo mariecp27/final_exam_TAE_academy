@@ -1,4 +1,4 @@
-package org.finalExam.configuration;
+package org.finalExam.configuration.mobile;
 
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
@@ -37,7 +37,7 @@ public abstract class MobileOperations {
      */
     public MobileOperations(AndroidDriver<AndroidElement> driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(waitDuration));
+        this.wait = new WebDriverWait(driver, waitDuration);
         initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(0)), this);
     }
 
@@ -94,8 +94,8 @@ public abstract class MobileOperations {
      * @param timeout int
      * @return true if a given AndroidElement is visible after a custom period of time (in seconds), otherwise false.
      */
-    public boolean isElementAvailable(AndroidElement element, int timeout) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+    public boolean isElementAvailable(AndroidElement element, long timeout) {
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
         try {
             waitForVisibility(element, wait);
             return true;

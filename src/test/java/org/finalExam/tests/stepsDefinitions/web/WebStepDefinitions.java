@@ -1,50 +1,24 @@
-package org.finalExam.tests.stepsDefinitions;
+package org.finalExam.tests.stepsDefinitions.web;
 
-import io.cucumber.java.AfterAll;
-import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.finalExam.configuration.DriverWeb;
 import org.finalExam.pageObjects.pages.HomePage;
 import org.finalExam.pageObjects.pages.WatchPage;
 import org.finalExam.reporting.Reporter;
+import org.finalExam.utils.data.WebData;
 import org.testng.Assert;
 
-import static java.lang.String.format;
+public class WebStepDefinitions {
 
-public class EspnWebStepdefs {
-
-    private static DriverWeb driver;
     private HomePage homePage;
     private WatchPage watchPage;
-    private final String URL = "https://www.espnqa.com/?src=com&_adblock=true&espn=cloud";
-    private final String USER = "Test";
     private static String email;
-    private final String EMAIL_LOGIN = "test.login.email.espn@gmail.com";
-    private final String PASSWORD = "testpassword2022";
-    private final String USER_WELCOME = "Welcome" + USER + "!";
-
-
-    @BeforeAll
-    public static void scenarioSetUp() {
-        driver = new DriverWeb();
-        Reporter.info("Deleting all cookies");
-        driver.getDriver().manage().deleteAllCookies();
-    }
-
-    @AfterAll
-    public static void tearDown() {
-        driver.getDriver().quit();
-    }
 
     @Given("I am in the ESPN website home page")
     public void iAmInTheESPNWebsiteHomePage() {
-        Reporter.info(format("Navigating to %s", URL));
-        driver.getDriver().get(URL);
-        driver.getDriver().manage().window().maximize();
-        homePage = new HomePage(driver.getDriver());
+        homePage = new HomePage(WebHooks.getDriver());
         homePage.closeBanner();
     }
 
@@ -59,13 +33,10 @@ public class EspnWebStepdefs {
     public void theLoginModalAndItsElementsShouldBeDisplayed() {
         Reporter.info("Verifying the login modal is visible");
         Assert.assertTrue(homePage.modalIsDisplayed(), "Log in modal is not visible");
-
         Reporter.info("Verifying the ESPN logo is visible");
         Assert.assertTrue(homePage.espnLogoIsDisplayed(), "ESPN logo is not visible");
-
         Reporter.info("Verifying the Log In button is visible");
         Assert.assertTrue(homePage.loginButtonIsDisplayed(), "Log In button is not visible");
-
         Reporter.info("Verifying the Sign Up button is visible");
         Assert.assertTrue(homePage.signUpButtonIsDisplayed(), "Sign Up button is not visible");
     }
@@ -79,22 +50,16 @@ public class EspnWebStepdefs {
     public void allTheElementsForTheSignUpProcedureShouldBeDisplayed() {
         Reporter.info("Verifying the Sign Up title is visible");
         Assert.assertTrue(homePage.signUPTitleIsDisplayed(), "Sign Up title is not visible");
-
         Reporter.info("Verifying the First Name input is visible");
         Assert.assertTrue(homePage.firstNameInputIsDisplayed(), "First Name input is not visible");
-
         Reporter.info("Verifying the Last Name input is visible");
         Assert.assertTrue(homePage.lastNameInputIsDisplayed(), "Last Name input is not visible");
-
         Reporter.info("Verifying the Email input is visible");
         Assert.assertTrue(homePage.emailInputForSignUpIsDisplayed(), "Email input is not visible");
-
         Reporter.info("Verifying the Password input is visible");
         Assert.assertTrue(homePage.passwordInputForSignUpIsDisplayed(), "Password input is not visible");
-
         Reporter.info("Verifying the Sign Up button is visible");
         Assert.assertTrue(homePage.signUpButtonForSignUpIsDisplayed(), "Sign Up button is not visible");
-
         Reporter.info("Verifying the Close button is visible");
         Assert.assertTrue(homePage.closeIframeButtonIsDisplayed(), "Close button is not visible");
     }
@@ -102,10 +67,10 @@ public class EspnWebStepdefs {
     @And("Enter all information for signing up")
     public void enterAllInformationForSigningUp() {
         email = homePage.setEmail();
-        homePage.typeOnFirstNameInput(USER);
-        homePage.typeOnLastNameInput(USER);
+        homePage.typeOnFirstNameInput(WebData.returnData("user"));
+        homePage.typeOnLastNameInput(WebData.returnData("user"));
         homePage.typeOnEmailInputForSignUp(email);
-        homePage.typeOnPasswordInputForSignUp(PASSWORD);
+        homePage.typeOnPasswordInputForSignUp(WebData.returnData("password"));
         homePage.mouseOverSignUpForSignUpButtonIframe();
         homePage.clickOnSignUpForSignUpButtonIframe();
         homePage.goOutFromIframe();
@@ -116,14 +81,14 @@ public class EspnWebStepdefs {
         homePage.waitForLogin();
         homePage.mouseOverUserIcon();
         Reporter.info("Verifying the account was properly created");
-        Assert.assertEquals(homePage.getWelcomeText(), USER_WELCOME, "Account was not created");
+        Assert.assertEquals(homePage.getWelcomeText(), WebData.returnData("welcomeText"), "Account was not created");
         homePage.clickOnLogoutLinkInHomePage();
         homePage.waitForLogout();
     }
 
     @Given("I am logged")
     public void iAmLogged() {
-        homePage.generalLoginProcedure(EMAIL_LOGIN, PASSWORD);
+        homePage.generalLoginProcedure(WebData.returnData("emailForLoggingIn"), WebData.returnData("password"));
     }
 
     @When("I go to the Watch page")
@@ -135,10 +100,8 @@ public class EspnWebStepdefs {
     public void thePageElementsShouldBeProperlyDisplayed() {
         Reporter.info("Verifying all cards in the second carousel have a title");
         Assert.assertTrue(watchPage.checkAllCardsTitle(), "Not all cards in the second carousel have a title");
-
         Reporter.info("Verifying all cards in the second carousel have a description");
         Assert.assertTrue(watchPage.checkAllCardsDescription(), "Not all cards in the second carousel have a description");
-
         watchPage.clickCard();
         Reporter.info("Verifying Close button is visible");
         Assert.assertTrue(watchPage.closeButtonModalIsDisplayed(), "Close button is not visible");
@@ -160,7 +123,7 @@ public class EspnWebStepdefs {
     @Then("The welcome text is displayed along with my name")
     public void theWelcomeTextIsDisplayedAlongWithMyName() {
         Reporter.info("Verifying the welcome text was properly displayed");
-        Assert.assertEquals(homePage.getWelcomeText(), USER_WELCOME, "The welcome text was not properly displayed");
+        Assert.assertEquals(homePage.getWelcomeText(), WebData.returnData("welcomeText"), "The welcome text was not properly displayed");
     }
 
     @When("I log out")
@@ -170,7 +133,7 @@ public class EspnWebStepdefs {
         homePage.waitForLogout();
     }
 
-    @Then("The welcome text is displayed along without my name")
+    @Then("The welcome text is displayed without my name")
     public void theWelcomeTextIsDisplayedAlongWithoutMyName() {
         homePage.mouseOverUserIcon();
         Reporter.info("Verifying the welcome text was properly displayed");

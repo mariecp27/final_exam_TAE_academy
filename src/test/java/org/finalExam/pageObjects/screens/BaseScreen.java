@@ -2,7 +2,7 @@ package org.finalExam.pageObjects.screens;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
-import org.finalExam.configuration.MobileOperations;
+import org.finalExam.configuration.mobile.MobileOperations;
 
 /**
  * Base class for all mobile page objects.

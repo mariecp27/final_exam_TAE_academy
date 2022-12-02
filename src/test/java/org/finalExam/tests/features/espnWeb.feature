@@ -42,4 +42,4 @@ Feature: ESPN performance review
   Scenario: Verify Welcome texts when logged out
     Given I am logged
     When I log out
-    Then The welcome text is displayed along without my name
+    Then The welcome text is displayed without my name

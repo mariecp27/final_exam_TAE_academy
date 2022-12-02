@@ -1,4 +1,4 @@
-package org.finalExam.configuration;
+package org.finalExam.configuration.web;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -7,14 +7,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 /**
  * Class for the Web Driver.
  */
-public class DriverWeb {
+public class CustomWebDriverManager {
     private WebDriver driver;
 
     /**
      * Constructor method.
      * Only Chrome browser is defined.
      */
-    public DriverWeb() {
+    public CustomWebDriverManager() {
         WebDriverManager.chromedriver().setup();
         this.driver = new ChromeDriver();
     }
@@ -26,4 +26,6 @@ public class DriverWeb {
     public WebDriver getDriver() {
         return this.driver;
     }
+
+
 }
