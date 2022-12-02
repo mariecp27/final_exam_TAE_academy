@@ -17,7 +17,7 @@ public class CustomMobileDriverManager {
     }
 
     /**
-     * Allows to get the Web Driver.
+     * Allows to get the WebDriver.
      * @return WebDriver
      */
     public AndroidDriver<AndroidElement> getDriver() {
