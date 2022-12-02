@@ -38,10 +38,10 @@ public class DashBoardScreen extends BaseScreen {
      * @author Hans.Marquez
      */
     public void navigateToOption(AndroidElement option) {
-        if (this.isElementAvailable(dismissWelcome, 25)){
+        if (this.isElementAvailable(dismissWelcome, 15)){
             click(dismissWelcome);
         }
-        if (this.isElementAvailable(dismissPreferenceUpdateButton, 25)){
+        if (this.isElementAvailable(dismissPreferenceUpdateButton, 15)){
             click(dismissPreferenceUpdateButton);
         }
         click(option);

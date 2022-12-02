@@ -87,7 +87,7 @@ public class MenuScreen extends BaseScreen {
      * @return {@link org.finalExam.pageObjects.screens.PrivacyAndLegalScreen}
      */
     public PrivacyAndLegalScreen clickOnPrivacyAndLegalOption() {
-        click(privacyAndLegalOption);
+        super.click(privacyAndLegalOption);
         return new PrivacyAndLegalScreen(getDriver());
     }
 }
