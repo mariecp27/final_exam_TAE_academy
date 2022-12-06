@@ -7,7 +7,7 @@ import org.finalExam.configuration.mobile.MobileOperations;
 /**
  * Base class for all mobile page objects.
  */
-public class BaseScreen extends MobileOperations {
+public abstract class BaseScreen extends MobileOperations {
 
     /**
      * Constructor method.

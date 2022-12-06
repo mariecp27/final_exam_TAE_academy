@@ -17,7 +17,7 @@ public class WebHooks {
      * Before hook for initializing the driver and going to the 'Home' page.
      */
     @Before
-    public void setUp() {
+    public void environmentSetUp() {
         driver = new CustomWebDriverManager();
         driver.getDriver().get(WebData.returnData("url"));
         driver.getDriver().manage().window().maximize();

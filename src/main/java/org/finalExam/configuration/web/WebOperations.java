@@ -10,7 +10,7 @@ import static org.openqa.selenium.support.PageFactory.initElements;
 /**
  * Class for defining all common operations in web application.
  */
-public class WebOperations {
+public abstract class WebOperations {
 
     private final WebDriver driver;
     private final WebDriverWait wait;

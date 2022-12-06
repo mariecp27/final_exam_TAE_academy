@@ -37,7 +37,7 @@ public class MobileHooks {
      * After hook for closing the app.
      */
     @After
-    public void mobileApplicationEnd() {
+    public void tearDown() {
         driver.getDriver().quit();
     }
 

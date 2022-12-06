@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 /**
  * Base class for all web page objects.
  */
-public class BasePage extends WebOperations {
+public abstract class BasePage extends WebOperations {
 
     /**
      * Constructor method.
