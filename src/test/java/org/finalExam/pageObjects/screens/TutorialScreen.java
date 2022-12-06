@@ -33,7 +33,7 @@ public class TutorialScreen extends BaseScreen {
      * Start permissions process.
      */
     public void startPermissionsProcess() {
-        click(getStartedButton);
+        super.click(this.getStartedButton);
     }
 
     /**
@@ -41,9 +41,9 @@ public class TutorialScreen extends BaseScreen {
      * @return {@link org.finalExam.pageObjects.screens.DashBoardScreen}
      */
     public DashBoardScreen shareLocationPermissions() {
-        click(shareLocationButton);
-        click(allowLocationButton);
-        click(allowButton);
+        super.click(this.shareLocationButton);
+        super.click(this.allowLocationButton);
+        super.click(this.allowButton);
         return new DashBoardScreen(getDriver());
     }
 }

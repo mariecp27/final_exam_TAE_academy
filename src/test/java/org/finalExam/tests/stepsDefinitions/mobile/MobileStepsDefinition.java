@@ -7,7 +7,7 @@ import org.finalExam.pageObjects.screens.*;
 import org.finalExam.reporting.Reporter;
 import org.testng.Assert;
 
-public class MobileStepDefinitions {
+public class MobileStepsDefinition {
 
     private TutorialScreen tutorialScreen;
     private DashBoardScreen dashBoardScreen;
@@ -16,6 +16,9 @@ public class MobileStepDefinitions {
     private PrivacyAndLegalScreen privacyAndLegalScreen;
     private AddPlansScreen addPlansScreen;
 
+    /**
+     * Allows to navigate to the app 'Dashboard' view.
+     */
     @Given("I am in the Dashboard view")
     public void iAmInTheDashboardView() {
         tutorialScreen = new TutorialScreen(MobileHooks.getDriver());
@@ -23,12 +26,23 @@ public class MobileStepDefinitions {
         dashBoardScreen = tutorialScreen.shareLocationPermissions();
     }
 
+    /**
+     * Allows to navigate to the app 'Map' view.
+     */
     @Given("I am in the Map view")
     public void iAmInTheMapView() {
         Reporter.info("Entering in the Map view");
         mapScreen = dashBoardScreen.goToMapScreen();
     }
 
+    /**
+     * Verifies if the followings elements in the 'Map' view are displayed:
+     * <ul>
+     *     <li>List button</li>
+     *     <li>Category button</li>
+     *     <li>Filter button</li>
+     * </ul>
+     */
     @Then("The Map view and its elements should be displayed")
     public void theMapViewAndItsElementsShouldBeDisplayed() {
         Reporter.info("Verifying Map view elements:");
@@ -40,11 +54,17 @@ public class MobileStepDefinitions {
         Assert.assertTrue(mapScreen.filterIsDisplayed(), "Filter button is not visible");
     }
 
+    /**
+     * Allows clicking in the 'Category List' element for displaying all available categories.
+     */
     @When("I tap on the Category List button")
     public void iTapOnTheCategoryListButton() {
         mapScreen.clickOnCategoryList();
     }
 
+    /**
+     * Verifies if the 'Category list' was properly displayed.
+     */
     @Then("Different categories, including Hotels option, should be displayed")
     public void differentCategoriesIncludingHotelsOptionShouldBeDisplayed() {
         Reporter.info("Verifying Category List elements:");
@@ -56,12 +76,22 @@ public class MobileStepDefinitions {
         Assert.assertTrue(mapScreen.hotelsOptionIsDisplayed(), "Hotels' option is not visible");
     }
 
+    /**
+     * Allows to navigate to the app 'Menu' view.
+     */
     @Given("I am in the Menu view")
     public void iAmInTheMenuView() {
         Reporter.info("Entering in the Menu view");
         menuScreen = dashBoardScreen.goToMenuScreen();
     }
 
+    /**
+     * Verifies if the followings elements in the 'Menu' view are displayed:
+     * <ul>
+     *     <li>Banner</li>
+     *     <li>Options at the end of the 'Menu' view</li>
+     * </ul>
+     */
     @Then("The Menu view and its elements should be displayed")
     public void theMenuViewAndItsElementsShouldBeDisplayed() {
         Reporter.info("Verifying Menu view elements:");
@@ -72,6 +102,9 @@ public class MobileStepDefinitions {
         Assert.assertTrue(menuScreen.checkMenuOptions(), "Menu options are not properly listed");
     }
 
+    /**
+     * Allows to scroll to the 'Privacy And Legal' option and click it for displaying its menu.
+     */
     @When("I select the Privacy & Legal option")
     public void iSelectThePrivacyLegalOption() {
         menuScreen.scrollToTheScreenEnd();
@@ -79,18 +112,27 @@ public class MobileStepDefinitions {
         privacyAndLegalScreen = menuScreen.clickOnPrivacyAndLegalOption();
     }
 
+    /**
+     * Verifies if all options in 'Privacy & Legal' were properly displayed.
+     */
     @Then("The Privacy & Legal options should be displayed")
     public void thePrivacyLegalOptionsShouldBeDisplayed() {
         Reporter.info("Verifying Privacy & Legal menu elements");
         Assert.assertTrue(privacyAndLegalScreen.checkPrivacyAndLegalOptions(), "Privacy & Legal options are not properly listed");
     }
 
+    /**
+     * Allows to navigate to the app 'Add Plans' view.
+     */
     @When("I select the Add Plans option")
     public void iSelectTheAddPlansOption() {
         Reporter.info("Entering in the Add Plans view");
         addPlansScreen = dashBoardScreen.goToAddPlansScreen();
     }
 
+    /**
+     * Verifies if the 'Check Dining Availability' option was properly displayed.
+     */
     @Then("The Check Dining Availability option should be displayed")
     public void theCheckDiningAvailabilityOptionShouldBeDisplayed() {
         Reporter.info("Check Dining Availability option is visible");

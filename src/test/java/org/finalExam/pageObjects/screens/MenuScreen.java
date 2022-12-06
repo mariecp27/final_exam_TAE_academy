@@ -35,7 +35,7 @@ public class MenuScreen extends BaseScreen {
      * @return true if the 'Banner' element is displayed in screen, otherwise false
      */
     public boolean bannerIsDisplayed() {
-        return isElementAvailable(menuBanner);
+        return super.isElementAvailable(this.menuBanner);
     }
 
     /**
@@ -45,7 +45,7 @@ public class MenuScreen extends BaseScreen {
     public void scrollToTheScreenEnd() {
         int swipes = 0;
         int maxSwipesAmount = 5;
-        while (!isPrivacyAndLegalOptionDisplayed() && swipes < maxSwipesAmount) {
+        while (!this.isPrivacyAndLegalOptionDisplayed() && swipes < maxSwipesAmount) {
             swipeVertical();
             swipes++;
         }
@@ -56,7 +56,7 @@ public class MenuScreen extends BaseScreen {
      * @return true if 'Privacy And Legal' option is displayed in screen, otherwise false
      */
     public boolean isPrivacyAndLegalOptionDisplayed() {
-        return isElementAvailable(privacyAndLegalOption, 5);
+        return super.isElementAvailable(this.privacyAndLegalOption, 5);
     }
 
     /**
@@ -75,19 +75,19 @@ public class MenuScreen extends BaseScreen {
                 "Help",
                 "Privacy & Legal"
         );
-        waitForVisibilityOfAll(menuOptions);
-        for (int i = 0; i < menuOptions.size() ; i++) {
-            isCorrect.add(menuOptions.get(i).getText().equals(expectedOptions.get(i)));
+        super.waitForVisibilityOfAll(this.menuOptions);
+        for (int i = 0; i < this.menuOptions.size() ; i++) {
+            isCorrect.add(this.menuOptions.get(i).getText().equals(expectedOptions.get(i)));
         }
         return !isCorrect.contains(false);
     }
 
     /**
-     * Allows clicking in the 'Privacy And Legal' option for displaying all available categories.
+     * Allows clicking in the 'Privacy And Legal' option for displaying its menu.
      * @return {@link org.finalExam.pageObjects.screens.PrivacyAndLegalScreen}
      */
     public PrivacyAndLegalScreen clickOnPrivacyAndLegalOption() {
-        super.click(privacyAndLegalOption);
+        super.click(this.privacyAndLegalOption);
         return new PrivacyAndLegalScreen(getDriver());
     }
 }

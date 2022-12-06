@@ -38,11 +38,11 @@ public class DashBoardScreen extends BaseScreen {
      * @author Hans.Marquez
      */
     public void navigateToOption(AndroidElement option) {
-        if (this.isElementAvailable(dismissWelcome, 15)){
-            click(dismissWelcome);
+        if (super.isElementAvailable(this.dismissWelcome, 15)){
+            click(this.dismissWelcome);
         }
-        if (this.isElementAvailable(dismissPreferenceUpdateButton, 15)){
-            click(dismissPreferenceUpdateButton);
+        if (super.isElementAvailable(this.dismissPreferenceUpdateButton, 15)){
+            click(this.dismissPreferenceUpdateButton);
         }
         click(option);
     }
@@ -52,7 +52,7 @@ public class DashBoardScreen extends BaseScreen {
      * @return {@link org.finalExam.pageObjects.screens.MapScreen}
      */
     public MapScreen goToMapScreen() {
-        navigateToOption(mapButton);
+        this.navigateToOption(this.mapButton);
         return new MapScreen(getDriver());
     }
 
@@ -61,7 +61,7 @@ public class DashBoardScreen extends BaseScreen {
      * @return {@link org.finalExam.pageObjects.screens.MenuScreen}
      */
     public MenuScreen goToMenuScreen() {
-        navigateToOption(menuButton);
+        this.navigateToOption(this.menuButton);
         return new MenuScreen(getDriver());
     }
 
@@ -70,7 +70,7 @@ public class DashBoardScreen extends BaseScreen {
      * @return {@link org.finalExam.pageObjects.screens.AddPlansScreen}
      */
     public AddPlansScreen goToAddPlansScreen() {
-        navigateToOption(addPlansButton);
+        this.navigateToOption(this.addPlansButton);
         return new AddPlansScreen(getDriver());
     }
 }

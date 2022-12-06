@@ -37,7 +37,7 @@ public class WatchPage extends BasePage {
      * @return List of WebElements
      */
     public List<WebElement> getCadsInSecondCarousel() {
-        return carousels.get(1).findElements(By.cssSelector("ul.Carousel__Inner li"));
+        return this.carousels.get(1).findElements(By.cssSelector("ul.Carousel__Inner li"));
     }
 
     /**
@@ -46,8 +46,8 @@ public class WatchPage extends BasePage {
      */
     public boolean checkAllCardsTitle() {
         List<Boolean> isTitle = new ArrayList<>();
-        waitForPresenceOfElements("ul.Carousel__Inner li");
-        getCadsInSecondCarousel().stream().forEach(element -> {
+        super.waitForPresenceOfElements("ul.Carousel__Inner li");
+        this.getCadsInSecondCarousel().stream().forEach(element -> {
             isTitle.add(!element.findElement(By.cssSelector("h2.WatchTile__Title")).getText().equals(""));
         });
         return !isTitle.contains(false);
@@ -59,8 +59,8 @@ public class WatchPage extends BasePage {
      */
     public boolean checkAllCardsDescription() {
         List<Boolean> isDescription = new ArrayList<>();
-        waitForPresenceOfElements("ul.Carousel__Inner li");
-        getCadsInSecondCarousel().stream().forEach(element -> {
+        super.waitForPresenceOfElements("ul.Carousel__Inner li");
+        this.getCadsInSecondCarousel().stream().forEach(element -> {
             isDescription.add(!element.findElement(By.cssSelector(".WatchTile__Meta")).getText().equals(""));
         });
         return !isDescription.contains(false);

@@ -43,9 +43,9 @@ public class PrivacyAndLegalScreen extends BaseScreen {
                 "In-App Maps Subject to Google Terms and Conditions",
                 "In-App Maps Subject to Google Privacy Policy"
         );
-        waitForVisibilityOfAll(privacyAndLegalOptions);
-        for (int i = 0; i < privacyAndLegalOptions.size() ; i++) {
-            isCorrect.add(privacyAndLegalOptions.get(i).getText().equals(expectedOptions.get(i)));
+        super.waitForVisibilityOfAll(this.privacyAndLegalOptions);
+        for (int i = 0; i < this.privacyAndLegalOptions.size() ; i++) {
+            isCorrect.add(this.privacyAndLegalOptions.get(i).getText().equals(expectedOptions.get(i)));
         }
         return !isCorrect.contains(false);
     }

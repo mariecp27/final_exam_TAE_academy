@@ -41,7 +41,7 @@ public class MapScreen extends BaseScreen {
      * @return true if the 'Category List' element is displayed in screen, otherwise false
      */
     public boolean categoryIsDisplayed() {
-        return isElementAvailable(categoryListButton);
+        return super.isElementAvailable(this.categoryListButton);
     }
 
     /**
@@ -49,7 +49,7 @@ public class MapScreen extends BaseScreen {
      * @return true if 'Filter Button' element is displayed in screen, otherwise false
      */
     public boolean filterIsDisplayed() {
-        return isElementAvailable(filterButton);
+        return super.isElementAvailable(this.filterButton);
     }
 
     /**
@@ -57,14 +57,14 @@ public class MapScreen extends BaseScreen {
      * @return true if 'Show List Button' element is displayed in screen, otherwise false
      */
     public boolean showListIsDisplayed() {
-        return isElementAvailable(showListButton);
+        return super.isElementAvailable(this.showListButton);
     }
 
     /**
      * Allows clicking in the 'Category List' element for displaying all available categories.
      */
     public void clickOnCategoryList() {
-        click(categoryListButton);
+        super.click(this.categoryListButton);
     }
 
     /**
@@ -72,8 +72,8 @@ public class MapScreen extends BaseScreen {
      * @return String
      */
     public String getCategoryListTitle() {
-        isElementAvailable(categoryTitle);
-        return categoryTitle.getText();
+        super.isElementAvailable(this.categoryTitle);
+        return this.categoryTitle.getText();
     }
 
     /**
@@ -95,9 +95,9 @@ public class MapScreen extends BaseScreen {
                 "Hotels",
                 "Spa and Recreation"
         );
-        waitForVisibilityOfAll(categoryList);
-        for (int i = 0; i < categoryList.size() ; i++) {
-            isCorrect.add(categoryList.get(i).getText().equals(expectedCategories.get(i)));
+        super.waitForVisibilityOfAll(this.categoryList);
+        for (int i = 0; i < this.categoryList.size() ; i++) {
+            isCorrect.add(this.categoryList.get(i).getText().equals(expectedCategories.get(i)));
         }
         return !isCorrect.contains(false);
     }
@@ -108,8 +108,8 @@ public class MapScreen extends BaseScreen {
      */
     public boolean hotelsOptionIsDisplayed() {
         List<Boolean> isHotelsOption = new ArrayList<>();
-        waitForVisibilityOfAll(categoryList);
-        categoryList.stream().forEach(element -> {
+        super.waitForVisibilityOfAll(this.categoryList);
+        this.categoryList.stream().forEach(element -> {
             isHotelsOption.add(element.getText().equals("Hotels"));
         });
         return isHotelsOption.contains(true);

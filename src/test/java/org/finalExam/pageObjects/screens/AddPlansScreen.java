@@ -29,8 +29,8 @@ public class AddPlansScreen extends BaseScreen {
      */
     public boolean checkDiningAvailabilityDisplayed() {
         List<Boolean> isCheckDiningAvailabilityOption = new ArrayList<>();
-        waitForVisibilityOfAll(addPlansOptions);
-        addPlansOptions.stream().forEach(element -> {
+        super.waitForVisibilityOfAll(this.addPlansOptions);
+        this.addPlansOptions.stream().forEach(element -> {
             isCheckDiningAvailabilityOption.add(element.getText().equals("Check Dining Availability"));
         });
         return isCheckDiningAvailabilityOption.contains(true);

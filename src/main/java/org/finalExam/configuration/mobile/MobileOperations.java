@@ -70,7 +70,7 @@ public abstract class MobileOperations {
      * @param element AndroidElement
      */
     public void click(AndroidElement element) {
-        waitForVisibility(element);
+        this.waitForVisibility(element);
         element.click();
     }
 
@@ -81,7 +81,7 @@ public abstract class MobileOperations {
      */
     public boolean isElementAvailable(AndroidElement element) {
         try {
-            waitForVisibility(element);
+            this.waitForVisibility(element);
             return true;
         } catch (NoSuchElementException | TimeoutException e) {
             return false;
@@ -97,7 +97,7 @@ public abstract class MobileOperations {
     public boolean isElementAvailable(AndroidElement element, long timeout) {
         WebDriverWait wait = new WebDriverWait(driver, timeout);
         try {
-            waitForVisibility(element, wait);
+            this.waitForVisibility(element, wait);
             return true;
         } catch (NoSuchElementException | TimeoutException e) {
             return false;
@@ -127,7 +127,7 @@ public abstract class MobileOperations {
      */
     public void waitForVisibilityOfAll(List<AndroidElement> elements) {
         elements.stream().forEach(element -> {
-            waitForVisibility(element);
+            this.waitForVisibility(element);
         });
     }
 }
